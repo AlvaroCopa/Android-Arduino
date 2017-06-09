@@ -31,6 +31,7 @@ public class Activity_Device extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__device);
+        //getSupportActionBar().hide();
         //Declaramos nuestros componenetes ralcionandolos con los del layout
         btnVinculados = (Button)findViewById(R.id.button);
         listaDispositivos = (ListView)findViewById(R.id.listView);
@@ -89,8 +90,8 @@ public class Activity_Device extends AppCompatActivity {
             String info = ((TextView) v).getText().toString();
             String address = info.substring(info.length() - 17);
 
-            Intent i = new Intent(Activity_Device.this, ControlAuto.class);
-
+            // Make an intent to start next activity while taking an extra which is the MAC address.
+            Intent i = new Intent(getApplicationContext(), ControlAuto.class);
             i.putExtra(EXTRA_ADDRESS, address);
             startActivity(i);
         }

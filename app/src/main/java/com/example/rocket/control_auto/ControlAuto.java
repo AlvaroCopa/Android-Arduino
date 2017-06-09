@@ -1,17 +1,18 @@
 package com.example.rocket.control_auto;
 
-import android.bluetooth.BluetoothDevice;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
-import android.widget.Toast;
-
+import android.bluetooth.BluetoothDevice;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -27,10 +28,11 @@ public class ControlAuto extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_control_auto);
+
         Intent newint = getIntent();
-        address = newint.getStringExtra(Activity_Device.EXTRA_ADDRESS);
-        setContentView(R.layout.activity__device);
+        address = newint.getStringExtra(Activity_Device.EXTRA_ADDRESS); //recivimos la mac address obtenida en la actividad anterior
+
+        setContentView(R.layout.activity_control_auto);
         iz = (Button)findViewById(R.id.izquierda);
         der = (Button)findViewById(R.id.derecha);
         at = (Button)findViewById(R.id.atras);
@@ -147,6 +149,22 @@ public class ControlAuto extends AppCompatActivity {
     {
         Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_control, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
     private class ConnectBT extends AsyncTask<Void, Void, Void>  // UI thread
     {
         private boolean ConnectSuccess = true;
@@ -154,7 +172,7 @@ public class ControlAuto extends AppCompatActivity {
         @Override
         protected void onPreExecute()
         {
-            progress = ProgressDialog.show(ControlAuto.this, "Connecting...", "Please wait!!!");
+            progress = ProgressDialog.show(ControlAuto.this, "Conectando...", "Espere Porfavor!!!");
         }
 
         @Override

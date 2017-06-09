@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Control_Auto</string>
+    <string name="app_name">Control Auto</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="activity_control_auto">Control Auto</string>
